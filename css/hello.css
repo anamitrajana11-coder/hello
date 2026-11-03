@@ -166,7 +166,57 @@ a.cs-tag { transition: color .2s, border-color .2s; }
 .hello-nav img { display: block; height: 26px; width: auto; }
 .hello-nav .hello-actions { gap: 12px; }
 
-.hello-open { padding-top: 96px; padding-bottom: 88px; display: flex; flex-direction: column; gap: 28px; }
+.hello-open {
+  padding-top: 96px;
+  padding-bottom: 88px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  align-items: start;
+  /* 64px on small laptops, up to 128px on wide screens (about 115 at 1440) */
+  column-gap: clamp(64px, 8vw, 128px);
+  row-gap: 28px;
+}
+/* The intro's pill, title, text and button share the grid with the card, so
+   the card can start level with the title (the pill sits above both). */
+.hello-open-main { display: contents; }
+.hello-open-main > * { grid-column: 1; min-width: 0; }
+.hello-open .hello-pill { justify-self: start; }
+/* The title's letters start 10px below the top of its line, so the card
+   does too, to line up with them. */
+.hello-companies { grid-column: 2; grid-row: 2 / span 3; margin-top: 10px; }
+
+/* Building products at: a v25 card, its muted title in the homepage's
+   section label type (.v25-h3), one logo per row, all centred. */
+.hello-companies {
+  /* lines at 1px and half strength, lighter than the v25 card's frame */
+  --line: 1px solid color-mix(in srgb, var(--ds-border-strong) 50%, transparent);
+  background: var(--ds-surface-card);
+  border: var(--line);
+  border-radius: var(--ds-radius-sm);
+}
+.hello-companies-title {
+  padding: 14px 20px;
+  text-align: center;
+  color: var(--ds-text-muted);
+  border-bottom: var(--line);
+  font-size: var(--ds-text-base);
+  line-height: 1.5;
+}
+.hello-companies ul { margin: 0; padding: 0; list-style: none; }
+.hello-companies li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 88px;
+  padding: 20px;
+}
+.hello-companies li + li { border-top: var(--line); }
+.hello-companies li img { display: block; max-width: 100%; height: 28px; width: auto; }
+/* Featurely's logo is a taller mark with smaller letters; a little more
+   height makes the two logos read the same size. */
+.hello-companies li img.hello-logo-featurely { height: 36px; }
+/* Toyota Mobility Foundation's logo is stacked on three lines. */
+.hello-companies li img.hello-logo-tmf { height: 52px; }
 .hello-pill {
   display: inline-flex;
   align-items: center;
@@ -389,11 +439,17 @@ a.cs-tag { transition: color .2s, border-color .2s; }
 }
 @media screen and (max-width: 991px) {
   .hello-btn { padding: 3px 3px 2px 2px; }
+  .hello-open { grid-template-columns: minmax(0, 1fr); }
+  .hello-companies { grid-column: 1; grid-row: auto; max-width: 480px; margin-top: 20px; }
 }
 @media screen and (max-width: 767px) {
   .hello-wrap { padding: 0 20px; }
   .hello-btn { padding: 3px; }
   .hello-open { padding-top: 64px; padding-bottom: 72px; }
+  .hello-companies li { min-height: 76px; padding: 16px; }
+  .hello-companies li img { height: 24px; }
+  .hello-companies li img.hello-logo-featurely { height: 30px; }
+  .hello-companies li img.hello-logo-tmf { height: 44px; }
   .hello-section { padding-bottom: 72px; }
   .hello-title { font-size: var(--ds-text-xl); }
   .hello-ask .hello-title { font-size: var(--ds-text-2xl); }
