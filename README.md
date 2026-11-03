@@ -5,5 +5,5 @@ A one-page introduction to Anamitra Jana's product design work, sent with outrea
 - `index.html`: the page. It is published with GitHub Pages and asks search engines not to list it.
 - `css/tokens.css`: a copy of the portfolio's design tokens.
 - `css/hello.css`: the page's layout and components.
-- `js/hello.js`: the testimonial deck and the work videos.
-- `assets/`: every picture, video and photo the page uses. The work videos and pictures are light copies made for this page, so everything loads within a few seconds.
+- `assets/`: every picture, video and photo the page uses, at full quality: the case studies' videos (each with a still frame) and the sharpest copy of each picture, up to 3840 px wide. Clicking a tile opens it large, like the portfolio's About page.
+- `js/hello.js`: besides the testimonial deck, it loads the videos two at a time from the top once the page is up, and runs the preview.
